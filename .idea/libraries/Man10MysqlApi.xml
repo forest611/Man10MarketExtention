@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Man10MysqlApi">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../minecraft server/plugins/Man10MysqlApi.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
