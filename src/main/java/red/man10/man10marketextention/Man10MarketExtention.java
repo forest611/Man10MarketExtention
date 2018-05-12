@@ -305,6 +305,7 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
 
         }
         if(invMap.get(e.getWhoClicked().getUniqueId()).equalsIgnoreCase("pullMenu")){
+
             int s = e.getSlot();
             if(!inta.contains(s)){
                 e.setCancelled(true);
@@ -325,7 +326,7 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
             ItemStack item = itemMapRev.get(inventoryData.get(e.getWhoClicked().getUniqueId()));
             item.setAmount(e.getInventory().getItem(e.getSlot()).getAmount());
             e.getWhoClicked().getInventory().addItem(item);
-            mysql.execute("UPDATE item_storage SET amount = amount - " + e.getInventory().getItem(e.getSlot()).getAmount());
+            mysql.execute("UPDATE item_storage SET amount = amount - " + e.getInventory().getItem(e.getSlot()).getAmount() + " WHERE uuid = '" + e.getWhoClicked().getUniqueId() + "' and item_id = '" + inventoryData.get(e.getWhoClicked().getUniqueId()) + "'");
             e.setCancelled(true);
         }
         if(invMap.get(e.getWhoClicked().getUniqueId()).equalsIgnoreCase("controlMenu")){
