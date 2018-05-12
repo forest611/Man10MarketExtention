@@ -15,7 +15,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
-import red.man10.MarketPlugin;
 import red.man10.man10mysqlapi.MySQLAPI;
 
 import java.io.ByteArrayInputStream;

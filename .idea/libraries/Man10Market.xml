@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Man10Market">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../minecraft server/plugins/Man10Market.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
