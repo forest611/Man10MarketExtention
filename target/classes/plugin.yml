@@ -2,7 +2,6 @@ name: Man10MarketExtention
 version: 1.0-SNAPSHOT
 main: red.man10.man10marketextention.Man10MarketExtention
 authors: [Sho0]
-depend: [Man10Market,vault]
 commands:
  mib:
  man10itembank:
