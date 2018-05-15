@@ -6,10 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b0c6376-18f4-440d-83cb-5aa727a4549a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/Man10MarketExtention.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/Man10MarketExtention.java" afterDir="false" />
-    </list>
+    <list default="true" id="0b0c6376-18f4-440d-83cb-5aa727a4549a" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,8 +21,8 @@
       <file leaf-file-name="Man10MarketExtention.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/Man10MarketExtention.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="545">
-              <caret line="261" column="33" lean-forward="true" selection-start-line="261" selection-start-column="33" selection-end-line="261" selection-end-column="33" />
+            <state relative-caret-position="147">
+              <caret line="300" column="13" lean-forward="true" selection-start-line="300" selection-start-column="13" selection-end-line="300" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -183,7 +180,7 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="358" />
+    <option name="x" value="162" />
     <option name="y" value="139" />
     <option name="width" value="2398" />
     <option name="height" value="1166" />
@@ -594,11 +591,26 @@
       <option name="project" value="LOCAL" />
       <updated>1526406341701</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="安山岩などが取り出し画面で正しく表示されない問題の修正">
+      <created>1526407025713</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1526407025713</updated>
+    </task>
+    <task id="LOCAL-00005" summary="安山岩などが取り出し画面で正しく表示されない問題の修正">
+      <created>1526407115395</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1526407115395</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="358" y="139" width="2398" height="1166" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -608,7 +620,7 @@
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" visible="true" weight="0.26528013" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.29445508" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29445508" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32905984" />
       <window_info id="Capture Tool" order="2" />
@@ -638,7 +650,8 @@
     <MESSAGE value="removed man10market dependency" />
     <MESSAGE value="removed dependency" />
     <MESSAGE value="pom.xmlにmysqlapiの依存関係を追加&#10;所持数０のアイテム個数でも市場価格を表示するように修正&#10;表示の調整&#10;その他typoを修正" />
-    <option name="LAST_COMMIT_MESSAGE" value="pom.xmlにmysqlapiの依存関係を追加&#10;所持数０のアイテム個数でも市場価格を表示するように修正&#10;表示の調整&#10;その他typoを修正" />
+    <MESSAGE value="安山岩などが取り出し画面で正しく表示されない問題の修正" />
+    <option name="LAST_COMMIT_MESSAGE" value="安山岩などが取り出し画面で正しく表示されない問題の修正" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -989,8 +1002,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/Man10MarketExtention.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="261" column="33" lean-forward="true" selection-start-line="261" selection-start-column="33" selection-end-line="261" selection-end-column="33" />
+        <state relative-caret-position="147">
+          <caret line="300" column="13" lean-forward="true" selection-start-line="300" selection-start-column="13" selection-end-line="300" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -109,12 +109,12 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
             if (items.contains(a.get(i))){
                 StorageSpace data = sp.get(a.get(i));
                 if(data.amount == 0){
-                    inv.setItem(i, new SItemStack(a.get(i).getType()).setDamage(itemMapRev.get(itemMap.get(a.get(i))).getDurability()).setDisplayname(itemNameMap.get(itemMap.get(a.get(i)))).addLore("§a所有量:§c"  +0).addLore("§a単価:§c" +0).addLore("§a推定価値:§c" +0).build());
+                    inv.setItem(i, new SItemStack(a.get(i).getType()).setDamage(itemMapRev.get(itemMap.get(a.get(i))).getDurability()).setDisplayname(itemNameMap.get(itemMap.get(a.get(i)))).addLore("§a所有量:§c"  +0).addLore("§a価市場価格:§c" +0).addLore("§a推定価値:§c" +0).build());
                 }else {
                     inv.setItem(i, new SItemStack(a.get(i).getType()).setDamage(itemMapRev.get(itemMap.get(a.get(i))).getDurability()).setDisplayname(data.key).addLore("§a所有量:§b§l" + Utility.itemString(data.amount)).addLore("§a市場価格:§c" + Utility.priceString(price.get(a.get(i)))+"/1個").addLore("§a推定価値:§e§l" + Utility.priceString( price.get(a.get(i)) * data.amount)).setGlowingEffect(true).build());
                 }
             }else{
-                inv.setItem(i, new SItemStack(a.get(i).getType()).setDamage(itemMapRev.get(itemMap.get(a.get(i))).getDurability()).setDisplayname(itemNameMap.get(itemMap.get(a.get(i)))).addLore("§a所有量:§c"  +Utility.itemString(0)).addLore("§a単市場価格:§c" +Utility.priceString(price.get(a.get(i)))+"/1個").addLore("§a推定価値:§c" +0).build());
+                inv.setItem(i, new SItemStack(a.get(i).getType()).setDamage(itemMapRev.get(itemMap.get(a.get(i))).getDurability()).setDisplayname(itemNameMap.get(itemMap.get(a.get(i)))).addLore("§a所有量:§c"  +Utility.itemString(0)).addLore("§a市場価格:§c" +Utility.priceString(price.get(a.get(i)))+"/1個").addLore("§a推定価値:§c" +0).build());
             }
         }
         inventoryInt = aa;
