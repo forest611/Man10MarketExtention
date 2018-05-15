@@ -260,7 +260,9 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
             inv.setItem(i, new SItemStack(Material.STAINED_GLASS_PANE).setDamage(3).build());
         }
         for(int i = 0;i < 7;i++){
-            inv.setItem(10 + i, new SItemStack(itemMapRev.get(inventoryData.get(uuid)).getType()).setAmount((int) Math.pow(2, i)).build());
+            //     安山岩などが取り出し画面で正しく表示されない問題の修正
+            int damage = itemMapRev.get(inventoryData.get(uuid)).getDurability();
+            inv.setItem(10 + i, new SItemStack(itemMapRev.get(inventoryData.get(uuid)).getType()).setDamage(damage ). setAmount((int) Math.pow(2, i)).build());
         }
         return inv;
     }
