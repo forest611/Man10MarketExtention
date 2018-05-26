@@ -348,6 +348,7 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
                 }
                 e.getWhoClicked().openInventory(createPullMenu(e.getWhoClicked().getUniqueId()));
                 invMap.put(e.getWhoClicked().getUniqueId(), "pullMenu");
+                return;
             }
         }
         if(invMap.get(e.getWhoClicked().getUniqueId()).equalsIgnoreCase("storeMenu")){
