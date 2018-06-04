@@ -100,21 +100,26 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
         HashMap<ItemStack, StorageSpace> sp = getPlayerStorageData(uuid);
         List<ItemStack> items = getPlayerStorage(uuid);
         int size = a.size();
-        if (size >= 46){
+        if(size >=46){
             size = 45;
+        }
+        int maxpage = a.size()/45;
+        int total = inventoryPage.get(uuid) * 45;
+        if(maxpage ==  inventoryPage.get(uuid)){
+            size = a.size() - total;
         }
         List<Integer> aa = new ArrayList<>();
         for(int i = 0;i < size;i++){
-            aa.add(itemMap.get(a.get(i)));
-            if (items.contains(a.get(i))){
-                StorageSpace data = sp.get(a.get(i));
+            aa.add(itemMap.get(a.get(total + i)));
+            if (items.contains(a.get(total + i))){
+                StorageSpace data = sp.get(a.get(total + i));
                 if(data.amount == 0){
-                    inv.setItem(i, new SItemStack(a.get(i).getType()).setDamage(itemMapRev.get(itemMap.get(a.get(i))).getDurability()).setDisplayname(itemNameMap.get(itemMap.get(a.get(i)))).addLore("§a所有量:§c"  +0).addLore("§a価市場価格:§c" +0).addLore("§a推定価値:§c" +0).build());
+                    inv.setItem(i, new SItemStack(a.get(total + i).getType()).setDamage(itemMapRev.get(itemMap.get(a.get(total + i))).getDurability()).setDisplayname(itemNameMap.get(itemMap.get(a.get(total + i)))).addLore("§a所有量:§c"  +0).addLore("§a単価:§c" +0).addLore("§a推定価値:§c" +0).build());
                 }else {
-                    inv.setItem(i, new SItemStack(a.get(i).getType()).setDamage(itemMapRev.get(itemMap.get(a.get(i))).getDurability()).setDisplayname(data.key).addLore("§a所有量:§b§l" + Utility.itemString(data.amount)).addLore("§a市場価格:§c" + Utility.priceString(price.get(a.get(i)))+"/1個").addLore("§a推定価値:§e§l" + Utility.priceString( price.get(a.get(i)) * data.amount)).setGlowingEffect(true).build());
+                    inv.setItem(i, new SItemStack(a.get(total + i).getType()).setDamage(itemMapRev.get(itemMap.get(a.get(total + i))).getDurability()).setDisplayname(data.key).addLore("§a所有量:§c" + data.amount).addLore("§a単価:§c" + price.get(a.get(total + i))).addLore("§a推定価値:§c" + price.get(a.get(total + i)) * data.amount).setGlowingEffect(true).build());
                 }
             }else{
-                inv.setItem(i, new SItemStack(a.get(i).getType()).setDamage(itemMapRev.get(itemMap.get(a.get(i))).getDurability()).setDisplayname(itemNameMap.get(itemMap.get(a.get(i)))).addLore("§a所有量:§c"  +Utility.itemString(0)).addLore("§a市場価格:§c" +Utility.priceString(price.get(a.get(i)))+"/1個").addLore("§a推定価値:§c" +0).build());
+                inv.setItem(i, new SItemStack(a.get(total + i).getType()).setDamage(itemMapRev.get(itemMap.get(a.get(total + i))).getDurability()).setDisplayname(itemNameMap.get(itemMap.get(a.get(total + i)))).addLore("§a所有量:§c"  +0).addLore("§a単価:§c" +0).addLore("§a推定価値:§c" +0).build());
             }
         }
         inventoryInt = aa;
@@ -164,6 +169,7 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
     public HashMap<ItemStack, Double> price = new HashMap<>();
     public HashMap<UUID, Integer> inventoryData = new HashMap<>();
     public List<Integer> inventoryInt = new ArrayList<>();
+    public HashMap<UUID, Integer> inventoryPage = new HashMap<>();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -260,9 +266,7 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
             inv.setItem(i, new SItemStack(Material.STAINED_GLASS_PANE).setDamage(3).build());
         }
         for(int i = 0;i < 7;i++){
-            //     安山岩などが取り出し画面で正しく表示されない問題の修正
-            int damage = itemMapRev.get(inventoryData.get(uuid)).getDurability();
-            inv.setItem(10 + i, new SItemStack(itemMapRev.get(inventoryData.get(uuid)).getType()).setDamage(damage ). setAmount((int) Math.pow(2, i)).build());
+            inv.setItem(10 + i, new SItemStack(itemMapRev.get(inventoryData.get(uuid)).getType()).setAmount((int) Math.pow(2, i)).build());
         }
         return inv;
     }
@@ -282,6 +286,29 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
             if(e.getInventory().getItem(e.getSlot()).getType() == null){
                 return;
             }
+            int s = e.getSlot();
+            if(s == 53 || s == 52){
+                List<ItemStack> a =   getMarketItem();
+                int maxpage = a.size()/45;
+                if(maxpage ==  inventoryPage.get(e.getWhoClicked().getUniqueId())){
+                    return;
+                }
+                inventoryPage.put(e.getWhoClicked().getUniqueId(), inventoryPage.get(e.getWhoClicked().getUniqueId()) + 1);
+                e.getWhoClicked().closeInventory();
+                e.getWhoClicked().openInventory(createTakeInventory(e.getWhoClicked().getUniqueId()));
+                invMap.put(e.getWhoClicked().getUniqueId(), "takeMenu");
+                return;
+            }
+            if(s == 46 || s == 45){
+                if(0 ==  inventoryPage.get(e.getWhoClicked().getUniqueId())){
+                    return;
+                }
+                inventoryPage.put(e.getWhoClicked().getUniqueId(), inventoryPage.get(e.getWhoClicked().getUniqueId()) - 1);
+                e.getWhoClicked().closeInventory();
+                e.getWhoClicked().openInventory(createTakeInventory(e.getWhoClicked().getUniqueId()));
+                invMap.put(e.getWhoClicked().getUniqueId(), "takeMenu");
+                return;
+            }
             inventoryData.put(e.getWhoClicked().getUniqueId(), inventoryInt.get(e.getSlot()));
             if(!getPlayerStorage(e.getWhoClicked().getUniqueId()).contains(itemMapRev.get(inventoryData.get(e.getWhoClicked().getUniqueId())))){
                 e.getWhoClicked().sendMessage("§c§l資材を所有していません");
@@ -293,14 +320,15 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
         }
         if(invMap.get(e.getWhoClicked().getUniqueId()).equalsIgnoreCase("mainMenu")){
             e.setCancelled(true);
-            int s = e.getSlot();
             Player p = (Player) e.getWhoClicked();
+            int s = e.getSlot();
             if(s == 10 || s == 11 || s == 12 || s == 19 || s == 20 || s == 21){
                 p.closeInventory();
                 p.openInventory(createStoreInventory());
                 invMap.put(p.getUniqueId(), "storeMenu");
             }
             if(s == 14 || s == 15 || s == 16 || s == 23 || s == 24 || s == 25){
+                inventoryPage.put(p.getUniqueId(), 0);
                 p.closeInventory();
                 p.openInventory(createTakeInventory(p.getUniqueId()));
                 invMap.put(p.getUniqueId(), "takeMenu");
@@ -349,7 +377,6 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
                 }
                 e.getWhoClicked().openInventory(createPullMenu(e.getWhoClicked().getUniqueId()));
                 invMap.put(e.getWhoClicked().getUniqueId(), "pullMenu");
-                return;
             }
         }
         if(invMap.get(e.getWhoClicked().getUniqueId()).equalsIgnoreCase("storeMenu")){
