@@ -1,7 +1,8 @@
 name: Man10MarketExtention
-version: ${project.version}
+version: 1.0
 main: red.man10.man10marketextention.Man10MarketExtention
-authors: [Sho0]
+authors: [Sho0,forest611]
+api-version: 1.16
 commands:
  mib:
  man10itembank:

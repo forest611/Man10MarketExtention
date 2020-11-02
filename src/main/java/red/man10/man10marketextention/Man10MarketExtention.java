@@ -18,10 +18,12 @@ import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 import red.man10.man10mysqlapi.MySQLAPI;
 
 import java.io.ByteArrayInputStream;
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 public final class Man10MarketExtention extends JavaPlugin implements Listener {
 
@@ -48,7 +50,7 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
     public Inventory createFistMenu(){
         Inventory inv = Bukkit.createInventory(null, 36,"§2§l動作を選択してください");
         for(int i = 0;i < 36;i++){
-            inv.setItem(i, new SItemStack(Material.STAINED_GLASS_PANE).setDamage(3).setDisplayname("").build());
+            inv.setItem(i, new SItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setDisplayname("").build());
         }
         for(int i = 0;i < 3;i++){
             inv.setItem(i + 10, new SItemStack(Material.CHEST).setDisplayname("§6§lアイテムを保管する").build());
@@ -75,9 +77,9 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
     public Inventory createStoreInventory(){
         Inventory inv = Bukkit.createInventory(null, 54, "§2§l転送するアイテムを入れてください");
         for(int i = 0;i < 9;i++) {
-            inv.setItem(45 + i, new SItemStack(Material.STAINED_GLASS_PANE).setDisplayname(" ").setDamage(3).build());
+            inv.setItem(45 + i, new SItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setDisplayname(" ").build());
         }
-        ItemStack item = new SItemStack(Material.STAINED_GLASS_PANE).setDisplayname("§c§l決定").setDamage(14).build();
+        ItemStack item = new SItemStack(Material.RED_STAINED_GLASS_PANE).setDisplayname("§c§l決定").build();
         inv.setItem(48, item);
         inv.setItem(49, item);
         inv.setItem(50, item);
@@ -88,10 +90,10 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
     public Inventory createTakeInventory(UUID uuid){
         Inventory inv = Bukkit.createInventory(null, 54, "§2§l転送するアイテムを選択してください");
         for(int i = 0;i < 9;i++) {
-            inv.setItem(45 + i, new SItemStack(Material.STAINED_GLASS_PANE).setDisplayname(" ").setDamage(3).build());
+            inv.setItem(45 + i, new SItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setDisplayname(" ").build());
         }
-        ItemStack next = new SItemStack(Material.STAINED_GLASS_PANE).setDisplayname("§c§l次").setDamage(14).build();
-        ItemStack back = new SItemStack(Material.STAINED_GLASS_PANE).setDisplayname("§c§l前").setDamage(14).build();
+        ItemStack next = new SItemStack(Material.RED_STAINED_GLASS_PANE).setDisplayname("§c§l次").build();
+        ItemStack back = new SItemStack(Material.RED_STAINED_GLASS_PANE).setDisplayname("§c§l前").build();
         inv.setItem(45, back);
         inv.setItem(46, back);
         inv.setItem(53, next);
@@ -114,12 +116,12 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
             if (items.contains(a.get(total + i))){
                 StorageSpace data = sp.get(a.get(total + i));
                 if(data.amount == 0){
-                    inv.setItem(i, new SItemStack(a.get(total + i).getType()).setDamage(itemMapRev.get(itemMap.get(a.get(total + i))).getDurability()).setDisplayname(itemNameMap.get(itemMap.get(a.get(total + i)))).addLore("§a所有量:§c"  +0).addLore("§a単価:§c" +0).addLore("§a推定価値:§c" +0).build());
+                    inv.setItem(i, new SItemStack(a.get(total + i).getType()).setCustomModelData(itemMapRev.get(itemMap.get(a.get(total + i))).getItemMeta().getCustomModelData()).setDisplayname(itemNameMap.get(itemMap.get(a.get(total + i)))).addLore("§a所有量:§c"  +0).addLore("§a単価:§c" +0).addLore("§a推定価値:§c" +0).build());
                 }else {
-                    inv.setItem(i, new SItemStack(a.get(total + i).getType()).setDamage(itemMapRev.get(itemMap.get(a.get(total + i))).getDurability()).setDisplayname(data.key).addLore("§a所有量:§c" + data.amount).addLore("§a単価:§c" + price.get(a.get(total + i))).addLore("§a推定価値:§c" + price.get(a.get(total + i)) * data.amount).setGlowingEffect(true).build());
+                    inv.setItem(i, new SItemStack(a.get(total + i).getType()).setCustomModelData(itemMapRev.get(itemMap.get(a.get(total + i))).getItemMeta().getCustomModelData()).setDisplayname(data.key).addLore("§a所有量:§c" + data.amount).addLore("§a単価:§c" + price.get(a.get(total + i))).addLore("§a推定価値:§c" + price.get(a.get(total + i)) * data.amount).setGlowingEffect(true).build());
                 }
             }else{
-                inv.setItem(i, new SItemStack(a.get(total + i).getType()).setDamage(itemMapRev.get(itemMap.get(a.get(total + i))).getDurability()).setDisplayname(itemNameMap.get(itemMap.get(a.get(total + i)))).addLore("§a所有量:§c"  +0).addLore("§a単価:§c" +0).addLore("§a推定価値:§c" +0).build());
+                inv.setItem(i, new SItemStack(a.get(total + i).getType()).setCustomModelData(itemMapRev.get(itemMap.get(a.get(total + i))).getItemMeta().getCustomModelData()).setDisplayname(itemNameMap.get(itemMap.get(a.get(total + i)))).addLore("§a所有量:§c"  +0).addLore("§a単価:§c" +0).addLore("§a推定価値:§c" +0).build());
             }
         }
         inventoryInt = aa;
@@ -252,7 +254,7 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
     public Inventory createControllMenu(String name, UUID uuid){
         Inventory inv = Bukkit.createInventory(null, 27, "§a" + name + "に対する操作を選んでください");
         for(int i = 0;i < 27;i++){
-            inv.setItem(i, new SItemStack(Material.STAINED_GLASS_PANE).setDamage(3).build());
+            inv.setItem(i, new SItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE).build());
         }
         inv.setItem(11, new SItemStack(Material.REDSTONE_BLOCK).setDisplayname("§c§l買い注文を入れる").build());
         inv.setItem(15, new SItemStack(Material.EMERALD_BLOCK).setDisplayname("§a§l売り注文を入れる").build());
@@ -263,7 +265,7 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
     public Inventory createPullMenu(UUID uuid){
         Inventory inv = Bukkit.createInventory(null, 27, "§a引き出す数を選んでください");
         for(int i = 0;i < 27;i++){
-            inv.setItem(i, new SItemStack(Material.STAINED_GLASS_PANE).setDamage(3).build());
+            inv.setItem(i, new SItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE).build());
         }
         for(int i = 0;i < 7;i++){
             inv.setItem(10 + i, new SItemStack(itemMapRev.get(inventoryData.get(uuid)).getType()).setAmount((int) Math.pow(2, i)).build());
@@ -283,9 +285,6 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
                 return;
             }
             e.setCancelled(true);
-            if(e.getInventory().getItem(e.getSlot()).getType() == null){
-                return;
-            }
             int s = e.getSlot();
             if(s == 53 || s == 52){
                 List<ItemStack> a =   getMarketItem();

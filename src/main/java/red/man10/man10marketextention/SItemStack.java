@@ -25,7 +25,7 @@ public class SItemStack {
     private List<String> lore = new ArrayList<>();
     private List<SEnchant> enchantments = new ArrayList<>();
     private List<ItemFlag> flags = new ArrayList<>();
-    private int damage = 0;
+    private int customModelData = 0;
     private boolean isGlowing = false;
     private boolean isUnbreakable = false;
     private boolean skullMode = false;
@@ -88,9 +88,8 @@ public class SItemStack {
         return this;
     }
 
-    public SItemStack setDamage(int damage){
-        this.damage = damage;
-        ItemStack item = new ItemStack(Material.AIR,1,(short) 1);
+    public SItemStack setCustomModelData(int cmd){
+        this.customModelData = cmd;
         return this;
     }
 
@@ -104,19 +103,19 @@ public class SItemStack {
         return this;
     }
 
-    public SItemStack setSkullPlayer(String skullOwner){
-        this.skullMode = true;
-        this.item = new ItemStack(Material.SKULL_ITEM,1,(short) 3);
-        this.skullOwner = skullOwner;
-        return this;
-    }
-
-    public SItemStack setSkullUrl(String url){
-        this.skullMode = true;
-        this.item = new ItemStack(Material.SKULL_ITEM,1,(short) 3);
-        this.url = url;
-        return this;
-    }
+//    public SItemStack setSkullPlayer(String skullOwner){
+//        this.skullMode = true;
+//        this.item = new ItemStack(Material.SKULL_ITEM,1,(short) 3);
+//        this.skullOwner = skullOwner;
+//        return this;
+//    }
+//
+//    public SItemStack setSkullUrl(String url){
+//        this.skullMode = true;
+//        this.item = new ItemStack(Material.SKULL_ITEM,1,(short) 3);
+//        this.url = url;
+//        return this;
+//    }
 
     private void resetSettings(){
         item = null;
@@ -127,7 +126,7 @@ public class SItemStack {
         lore = new ArrayList<>();
         enchantments = new ArrayList<>();
         flags = new ArrayList<>();
-        damage = 0;
+        customModelData = 0;
         isGlowing = false;
         isUnbreakable = false;
         skullMode = false;
@@ -146,7 +145,7 @@ public class SItemStack {
             this.enchantments.add(se);
         }
         this.flags = (List<ItemFlag>) item.getItemMeta().getItemFlags();
-        this.damage = item.getDurability();
+        this.customModelData = item.getDurability();
         this.isGlowing = item.getItemMeta().hasItemFlag(ItemFlag.HIDE_ENCHANTS);
         this.isUnbreakable = item.getItemMeta().isUnbreakable();
 
@@ -161,7 +160,7 @@ public class SItemStack {
     public ItemStack build(){
         ItemStack item = this.item;
         item.setAmount(this.amount);
-        item.setDurability((short) this.damage);
+        item.setDurability((short) this.customModelData);
         if(!skullMode){
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setDisplayName(this.displayName);
