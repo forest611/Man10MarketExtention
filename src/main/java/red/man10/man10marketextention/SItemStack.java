@@ -57,7 +57,7 @@ public class SItemStack {
         return this;
     }
 
-    public SItemStack setDisplayname(String name){
+    public SItemStack setDisplayName(String name){
         this.displayName = name;
         return this;
     }
