@@ -27,14 +27,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b0c6376-18f4-440d-83cb-5aa727a4549a" name="Default" comment="fix gitignore">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Man10MarketExtention.xml" afterDir="false" />
+    <list default="true" id="0b0c6376-18f4-440d-83cb-5aa727a4549a" name="Default" comment="バグ修正、CustomModelData対応">
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Man10MarketExtention_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/Man10MarketExtention.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/Man10MarketExtention.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/SItemStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/SItemStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,11 +105,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
-      </MavenGeneralSettings>
-    </option>
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="downloadDocsAutomatically" value="true" />
@@ -138,11 +132,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/build.gradle" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.38551402" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -389,7 +383,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605342046263</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="バグ修正、CustomModelData対応">
+      <created>1608549035171</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1608549035171</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -411,41 +412,8 @@
     <MESSAGE value="pom.xmlにmysqlapiの依存関係を追加&#10;所持数０のアイテム個数でも市場価格を表示するように修正&#10;表示の調整&#10;その他typoを修正" />
     <MESSAGE value="安山岩などが取り出し画面で正しく表示されない問題の修正" />
     <MESSAGE value="fix gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix gitignore" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="639" y="241" key="#Project_Structure" timestamp="1605341973314">
-      <screen x="0" y="23" width="2304" height="1273" />
-    </state>
-    <state x="639" y="241" key="#Project_Structure/2304.95.1920.1057/0.23.2304.1273@0.23.2304.1273" timestamp="1605341973314" />
-    <state x="691" y="235" key="CommitChangelistDialog2" timestamp="1605342046161">
-      <screen x="0" y="23" width="2304" height="1273" />
-    </state>
-    <state x="691" y="235" key="CommitChangelistDialog2/2304.95.1920.1057/0.23.2304.1273@0.23.2304.1273" timestamp="1605342046161" />
-    <state width="2260" height="319" key="GridCell.Tab.0.bottom" timestamp="1604316498993">
-      <screen x="0" y="23" width="2304" height="1273" />
-    </state>
-    <state width="2260" height="319" key="GridCell.Tab.0.bottom/2304.95.1920.1057/0.23.2304.1273@0.23.2304.1273" timestamp="1604316498993" />
-    <state width="2260" height="319" key="GridCell.Tab.0.center" timestamp="1604316498993">
-      <screen x="0" y="23" width="2304" height="1273" />
-    </state>
-    <state width="2260" height="319" key="GridCell.Tab.0.center/2304.95.1920.1057/0.23.2304.1273@0.23.2304.1273" timestamp="1604316498993" />
-    <state width="2260" height="319" key="GridCell.Tab.0.left" timestamp="1604316498993">
-      <screen x="0" y="23" width="2304" height="1273" />
-    </state>
-    <state width="2260" height="319" key="GridCell.Tab.0.left/2304.95.1920.1057/0.23.2304.1273@0.23.2304.1273" timestamp="1604316498993" />
-    <state width="2260" height="319" key="GridCell.Tab.0.right" timestamp="1604316498993">
-      <screen x="0" y="23" width="2304" height="1273" />
-    </state>
-    <state width="2260" height="319" key="GridCell.Tab.0.right/2304.95.1920.1057/0.23.2304.1273@0.23.2304.1273" timestamp="1604316498993" />
-    <state x="639" y="241" key="SettingsEditor" timestamp="1605342264381">
-      <screen x="0" y="23" width="2304" height="1273" />
-    </state>
-    <state x="639" y="241" key="SettingsEditor/2304.95.1920.1057/0.23.2304.1273@0.23.2304.1273" timestamp="1605342264381" />
-    <state x="751" y="399" key="Vcs.Push.Dialog.v2" timestamp="1605342048379">
-      <screen x="0" y="23" width="2304" height="1273" />
-    </state>
-    <state x="751" y="399" key="Vcs.Push.Dialog.v2/2304.95.1920.1057/0.23.2304.1273@0.23.2304.1273" timestamp="1605342048379" />
+    <MESSAGE value="バグ修正、CustomModelData対応" />
+    <option name="LAST_COMMIT_MESSAGE" value="バグ修正、CustomModelData対応" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
