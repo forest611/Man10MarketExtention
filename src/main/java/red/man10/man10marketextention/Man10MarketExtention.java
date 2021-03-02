@@ -72,8 +72,6 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
         // Plugin shutdown logic
     }
 
-    public HashMap<UUID, String> invMap = new HashMap<>();
-
     public Inventory createStoreInventory(){
         Inventory inv = Bukkit.createInventory(null, 54, "§2§l転送するアイテムを入れてください");
         for(int i = 0;i < 9;i++) {
@@ -198,7 +196,6 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
                     p.sendMessage("§4あなたには権限がありません");
                     return false;
                 }
-                invMap.put(p.getUniqueId(), "storeMenu");
                 p.openInventory(createStoreInventory());
             }
             if(args[0].equalsIgnoreCase("take")){
@@ -207,7 +204,6 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
                     p.sendMessage("§4あなたには権限がありません");
                     return false;
                 }
-                invMap.put(p.getUniqueId(), "takeMenu");
                 p.openInventory(createTakeInventory(p.getUniqueId()));
             }
         }else{
@@ -216,7 +212,6 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
                 p.sendMessage("§4あなたには権限がありません");
                 return false;
             }
-            invMap.put(p.getUniqueId(), "mainMenu");
             p.openInventory(createFistMenu());
         }
         return true;
@@ -268,7 +263,7 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
     }
 
     public Inventory createControlMenu(String name, UUID uuid){
-        Inventory inv = Bukkit.createInventory(null, 27, "§a" + name + "に対する操作を選んでください");
+        Inventory inv = Bukkit.createInventory(null, 27, "§a操作を選んでください");
         for(int i = 0;i < 27;i++){
             inv.setItem(i, new SItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE).build());
         }
@@ -292,10 +287,14 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
 
     @EventHandler
     public void click(InventoryClickEvent e){
-        if(!invMap.containsKey(e.getWhoClicked().getUniqueId())){
-            return;
-        }
-        if(invMap.get(e.getWhoClicked().getUniqueId()).equalsIgnoreCase("takeMenu")){
+        if (
+                e.getWhoClicked().getOpenInventory().getTitle().equals("§2§l転送するアイテムを入れてください") ||
+                        e.getWhoClicked().getOpenInventory().getTitle().equals("§2§l転送するアイテムを選択してください") ||
+                        e.getWhoClicked().getOpenInventory().getTitle().equals("§2§l動作を選択してください") ||
+                        e.getWhoClicked().getOpenInventory().getTitle().equals("§a引き出す数を選んでください") ||
+                        e.getWhoClicked().getOpenInventory().getTitle().equals("§a操作を選んでください")
+        )
+        if(e.getWhoClicked().getOpenInventory().getTitle().equals("§2§l転送するアイテムを選択してください")){
             if(e.getAction() != InventoryAction.PICKUP_ALL){
                 e.setCancelled(true);
                 return;
@@ -311,7 +310,6 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
                 inventoryPage.put(e.getWhoClicked().getUniqueId(), inventoryPage.get(e.getWhoClicked().getUniqueId()) + 1);
                 e.getWhoClicked().closeInventory();
                 e.getWhoClicked().openInventory(createTakeInventory(e.getWhoClicked().getUniqueId()));
-                invMap.put(e.getWhoClicked().getUniqueId(), "takeMenu");
                 return;
             }
             if(s == 46 || s == 45){
@@ -321,7 +319,6 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
                 inventoryPage.put(e.getWhoClicked().getUniqueId(), inventoryPage.get(e.getWhoClicked().getUniqueId()) - 1);
                 e.getWhoClicked().closeInventory();
                 e.getWhoClicked().openInventory(createTakeInventory(e.getWhoClicked().getUniqueId()));
-                invMap.put(e.getWhoClicked().getUniqueId(), "takeMenu");
                 return;
             }
             inventoryData.put(e.getWhoClicked().getUniqueId(), inventoryInt.get(e.getSlot()));
@@ -330,27 +327,24 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
                 return;
             }
             e.getWhoClicked().openInventory(createPullMenu(e.getWhoClicked().getUniqueId()));
-            invMap.put(e.getWhoClicked().getUniqueId(), "pullMenu");
             return;
         }
-        if(invMap.get(e.getWhoClicked().getUniqueId()).equalsIgnoreCase("mainMenu")){
+        if(e.getWhoClicked().getOpenInventory().getTitle().equals("§2§l動作を選択してください")){
             e.setCancelled(true);
             Player p = (Player) e.getWhoClicked();
             int s = e.getSlot();
             if(s == 10 || s == 11 || s == 12 || s == 19 || s == 20 || s == 21){
                 p.closeInventory();
                 p.openInventory(createStoreInventory());
-                invMap.put(p.getUniqueId(), "storeMenu");
             }
             if(s == 14 || s == 15 || s == 16 || s == 23 || s == 24 || s == 25){
                 inventoryPage.put(p.getUniqueId(), 0);
                 p.closeInventory();
                 p.openInventory(createTakeInventory(p.getUniqueId()));
-                invMap.put(p.getUniqueId(), "takeMenu");
             }
 
         }
-        if(invMap.get(e.getWhoClicked().getUniqueId()).equalsIgnoreCase("pullMenu")){
+        if(e.getWhoClicked().getOpenInventory().getTitle().equals("§2§l転送するアイテムを選択してください")){
 
             int s = e.getSlot();
             if(!inta.contains(s)){
@@ -375,7 +369,7 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
             mysql.execute("UPDATE item_storage SET amount = amount - " + e.getInventory().getItem(e.getSlot()).getAmount() + " WHERE uuid = '" + e.getWhoClicked().getUniqueId() + "' and item_id = '" + inventoryData.get(e.getWhoClicked().getUniqueId()) + "'");
             e.setCancelled(true);
         }
-        if(invMap.get(e.getWhoClicked().getUniqueId()).equalsIgnoreCase("controlMenu")){
+        if(e.getWhoClicked().getOpenInventory().getTitle().equals("§a操作を選んでください")){
             e.setCancelled(true);
             if(e.getSlot() == 15){
                 Bukkit.getServer().dispatchCommand(e.getWhoClicked(), "mm price " + itemNameMap.get(inventoryData.get(e.getWhoClicked().getUniqueId())));
@@ -391,10 +385,9 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
                     return;
                 }
                 e.getWhoClicked().openInventory(createPullMenu(e.getWhoClicked().getUniqueId()));
-                invMap.put(e.getWhoClicked().getUniqueId(), "pullMenu");
             }
         }
-        if(invMap.get(e.getWhoClicked().getUniqueId()).equalsIgnoreCase("storeMenu")){
+        if( e.getWhoClicked().getOpenInventory().getTitle().equals("§2§l転送するアイテムを入れてください")){
             List<Integer> a = new ArrayList<>();
             for(int i = 45;i < 54;i++){
                 a.add(i);
@@ -437,6 +430,7 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
         }
     }
 
+
     public void sendMessageOfStoreToPlayer(HashMap<Integer, Long> map, Player p){
         for(int i = 0;i < map.size();i++){
             String itemName = itemNameMap.get(map.keySet().toArray()[i]);
@@ -447,10 +441,7 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
 
     @EventHandler
     public void closeInventory(InventoryCloseEvent e){
-        if(!invMap.containsKey(e.getPlayer().getUniqueId())){
-            return;
-        }
-        if(invMap.get(e.getPlayer().getUniqueId()).equalsIgnoreCase("storeMenu")){
+        if(e.getPlayer().getOpenInventory().getTitle().equals("§2§l転送するアイテムを選択してください")){
             HashMap<Integer, Long> tempMap = new HashMap<>();
             ArrayList<ItemStack> items = getMarketItem();
             for(int i = 0;i < 45;i++){
@@ -475,6 +466,5 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
             }
             sendMessageOfStoreToPlayer(tempMap, (Player) e.getPlayer());
         }
-        invMap.remove(e.getPlayer().getUniqueId());
     }
 }
