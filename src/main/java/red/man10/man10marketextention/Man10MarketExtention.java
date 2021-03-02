@@ -321,6 +321,7 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
                 e.getWhoClicked().openInventory(createTakeInventory(e.getWhoClicked().getUniqueId()));
                 return;
             }
+            if (s == 47 || s == 48 || s == 49 || s == 50 || s == 51) return;
             inventoryData.put(e.getWhoClicked().getUniqueId(), inventoryInt.get(e.getSlot()));
             if(!getPlayerStorage(e.getWhoClicked().getUniqueId()).contains(itemMapRev.get(inventoryData.get(e.getWhoClicked().getUniqueId())))){
                 e.getWhoClicked().sendMessage("§c§l資材を所有していません");
@@ -344,7 +345,7 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
             }
 
         }
-        if(e.getWhoClicked().getOpenInventory().getTitle().equals("§2§l転送するアイテムを選択してください")){
+        if(e.getWhoClicked().getOpenInventory().getTitle().equals("§a引き出す数を選んでください")){
 
             int s = e.getSlot();
             if(!inta.contains(s)){
