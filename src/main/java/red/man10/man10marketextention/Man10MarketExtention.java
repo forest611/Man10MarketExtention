@@ -28,7 +28,9 @@ import java.util.UUID;
 public final class Man10MarketExtention extends JavaPlugin implements Listener {
 
     MySQLAPI mysql = null;
-    List<Integer> inta = new ArrayList<>();
+    final List<Integer> inta = new ArrayList<>();
+
+    final List<String> TITLES = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -45,6 +47,13 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
         inta.add(14);
         inta.add(15);
         inta.add(16);
+
+        TITLES.add("§2§l転送するアイテムを入れてください");
+        TITLES.add("§2§l転送するアイテムを選択してください");
+        TITLES.add("§2§l動作を選択してください");
+        TITLES.add("§a引き出す数を選んでください");
+        TITLES.add("§a操作を選んでください");
+
     }
 
     public Inventory createFistMenu(){
@@ -287,14 +296,12 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
 
     @EventHandler
     public void click(InventoryClickEvent e){
-        if (
-                e.getWhoClicked().getOpenInventory().getTitle().equals("§2§l転送するアイテムを入れてください") ||
-                        e.getWhoClicked().getOpenInventory().getTitle().equals("§2§l転送するアイテムを選択してください") ||
-                        e.getWhoClicked().getOpenInventory().getTitle().equals("§2§l動作を選択してください") ||
-                        e.getWhoClicked().getOpenInventory().getTitle().equals("§a引き出す数を選んでください") ||
-                        e.getWhoClicked().getOpenInventory().getTitle().equals("§a操作を選んでください")
-        )
-        if(e.getWhoClicked().getOpenInventory().getTitle().equals("§2§l転送するアイテムを選択してください")){
+
+        Player p = (Player) e.getWhoClicked();
+
+        if (!TITLES.contains(p.getOpenInventory().getTitle()))return;
+
+        if(p.getOpenInventory().getTitle().equals("§2§l転送するアイテムを選択してください")){
             if(e.getAction() != InventoryAction.PICKUP_ALL){
                 e.setCancelled(true);
                 return;
@@ -304,35 +311,35 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
             if(s == 53 || s == 52){
                 List<ItemStack> a =   getMarketItem();
                 int maxpage = a.size()/45;
-                if(maxpage ==  inventoryPage.get(e.getWhoClicked().getUniqueId())){
+                if(maxpage ==  inventoryPage.get(p.getUniqueId())){
                     return;
                 }
-                inventoryPage.put(e.getWhoClicked().getUniqueId(), inventoryPage.get(e.getWhoClicked().getUniqueId()) + 1);
-                e.getWhoClicked().closeInventory();
-                e.getWhoClicked().openInventory(createTakeInventory(e.getWhoClicked().getUniqueId()));
+                inventoryPage.put(p.getUniqueId(), inventoryPage.get(p.getUniqueId()) + 1);
+                p.closeInventory();
+                p.openInventory(createTakeInventory(p.getUniqueId()));
                 return;
             }
             if(s == 46 || s == 45){
-                if(0 ==  inventoryPage.get(e.getWhoClicked().getUniqueId())){
+                if(0 ==  inventoryPage.get(p.getUniqueId())){
                     return;
                 }
-                inventoryPage.put(e.getWhoClicked().getUniqueId(), inventoryPage.get(e.getWhoClicked().getUniqueId()) - 1);
-                e.getWhoClicked().closeInventory();
-                e.getWhoClicked().openInventory(createTakeInventory(e.getWhoClicked().getUniqueId()));
+                inventoryPage.put(p.getUniqueId(), inventoryPage.get(p.getUniqueId()) - 1);
+                p.closeInventory();
+                p.openInventory(createTakeInventory(p.getUniqueId()));
                 return;
             }
             if (s == 47 || s == 48 || s == 49 || s == 50 || s == 51) return;
-            inventoryData.put(e.getWhoClicked().getUniqueId(), inventoryInt.get(e.getSlot()));
-            if(!getPlayerStorage(e.getWhoClicked().getUniqueId()).contains(itemMapRev.get(inventoryData.get(e.getWhoClicked().getUniqueId())))){
-                e.getWhoClicked().sendMessage("§c§l資材を所有していません");
+            inventoryData.put(p.getUniqueId(), inventoryInt.get(e.getSlot()));
+            if(!getPlayerStorage(p.getUniqueId()).contains(itemMapRev.get(inventoryData.get(p.getUniqueId())))){
+                p.sendMessage("§c§l資材を所有していません");
                 return;
             }
-            e.getWhoClicked().openInventory(createPullMenu(e.getWhoClicked().getUniqueId()));
+            p.openInventory(createPullMenu(p.getUniqueId()));
             return;
         }
-        if(e.getWhoClicked().getOpenInventory().getTitle().equals("§2§l動作を選択してください")){
+        if(p.getOpenInventory().getTitle().equals("§2§l動作を選択してください")){
             e.setCancelled(true);
-            Player p = (Player) e.getWhoClicked();
+
             int s = e.getSlot();
             if(s == 10 || s == 11 || s == 12 || s == 19 || s == 20 || s == 21){
                 p.closeInventory();
@@ -345,50 +352,50 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
             }
 
         }
-        if(e.getWhoClicked().getOpenInventory().getTitle().equals("§a引き出す数を選んでください")){
+        if(p.getOpenInventory().getTitle().equals("§a引き出す数を選んでください")){
 
             int s = e.getSlot();
             if(!inta.contains(s)){
                 e.setCancelled(true);
                 return;
             }
-            if(e.getWhoClicked().getInventory().firstEmpty() == -1){
-                e.getWhoClicked().sendMessage("§cインベントリがいっぱいです");
+            if(p.getInventory().firstEmpty() == -1){
+                p.sendMessage("§cインベントリがいっぱいです");
                 e.setCancelled(true);
                 return;
             }
-            HashMap<ItemStack, StorageSpace> a = getPlayerStorageData(e.getWhoClicked().getUniqueId());
-            StorageSpace b = a.get(itemMapRev.get(inventoryData.get(e.getWhoClicked().getUniqueId())));
+            HashMap<ItemStack, StorageSpace> a = getPlayerStorageData(p.getUniqueId());
+            StorageSpace b = a.get(itemMapRev.get(inventoryData.get(p.getUniqueId())));
             if(b.amount < e.getInventory().getItem(e.getSlot()).getAmount()){
-                e.getWhoClicked().sendMessage("§c資材が不足してます");
+                p.sendMessage("§c資材が不足してます");
                 e.setCancelled(true);
                 return;
             }
-            ItemStack item = itemMapRev.get(inventoryData.get(e.getWhoClicked().getUniqueId()));
+            ItemStack item = itemMapRev.get(inventoryData.get(p.getUniqueId()));
             item.setAmount(e.getInventory().getItem(e.getSlot()).getAmount());
-            e.getWhoClicked().getInventory().addItem(item);
-            mysql.execute("UPDATE item_storage SET amount = amount - " + e.getInventory().getItem(e.getSlot()).getAmount() + " WHERE uuid = '" + e.getWhoClicked().getUniqueId() + "' and item_id = '" + inventoryData.get(e.getWhoClicked().getUniqueId()) + "'");
+            p.getInventory().addItem(item);
+            mysql.execute("UPDATE item_storage SET amount = amount - " + e.getInventory().getItem(e.getSlot()).getAmount() + " WHERE uuid = '" + p.getUniqueId() + "' and item_id = '" + inventoryData.get(p.getUniqueId()) + "'");
             e.setCancelled(true);
         }
-        if(e.getWhoClicked().getOpenInventory().getTitle().equals("§a操作を選んでください")){
+        if(p.getOpenInventory().getTitle().equals("§a操作を選んでください")){
             e.setCancelled(true);
             if(e.getSlot() == 15){
-                Bukkit.getServer().dispatchCommand(e.getWhoClicked(), "mm price " + itemNameMap.get(inventoryData.get(e.getWhoClicked().getUniqueId())));
-                e.getWhoClicked().closeInventory();
+                Bukkit.getServer().dispatchCommand(p, "mm price " + itemNameMap.get(inventoryData.get(p.getUniqueId())));
+                p.closeInventory();
             }
             if(e.getSlot() == 11){
-                Bukkit.getServer().dispatchCommand(e.getWhoClicked(), "mm price " + itemNameMap.get(inventoryData.get(e.getWhoClicked().getUniqueId())));
-                e.getWhoClicked().closeInventory();
+                Bukkit.getServer().dispatchCommand(p, "mm price " + itemNameMap.get(inventoryData.get(p.getUniqueId())));
+                p.closeInventory();
             }
             if(e.getSlot() == 13){
-                if(!getPlayerStorage(e.getWhoClicked().getUniqueId()).contains(itemMapRev.get(inventoryData.get(e.getWhoClicked().getUniqueId())))){
-                    e.getWhoClicked().sendMessage("§c§l資材を所有していません");
+                if(!getPlayerStorage(p.getUniqueId()).contains(itemMapRev.get(inventoryData.get(p.getUniqueId())))){
+                    p.sendMessage("§c§l資材を所有していません");
                     return;
                 }
-                e.getWhoClicked().openInventory(createPullMenu(e.getWhoClicked().getUniqueId()));
+                p.openInventory(createPullMenu(p.getUniqueId()));
             }
         }
-        if( e.getWhoClicked().getOpenInventory().getTitle().equals("§2§l転送するアイテムを入れてください")){
+        if( p.getOpenInventory().getTitle().equals("§2§l転送するアイテムを入れてください")){
             List<Integer> a = new ArrayList<>();
             for(int i = 45;i < 54;i++){
                 a.add(i);
@@ -417,15 +424,15 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
                     }
                 }
                 for(int i = 0;i < tempMap.size();i++){
-                    if(!checkIfUserHasStorage(e.getWhoClicked().getUniqueId(), (Integer) tempMap.keySet().toArray()[i])){
+                    if(!checkIfUserHasStorage(p.getUniqueId(), (Integer) tempMap.keySet().toArray()[i])){
                         mysql.execute("INSERT INTO item_storage (`id`,`uuid`,`player`,`item_id`,`key`,`amount`,`datetime`) VALUES " +
-                                "('0','" + e.getWhoClicked().getUniqueId() + "','" + e.getWhoClicked().getName() + "','" + tempMap.keySet().toArray()[i] + "','" + itemNameMap.get(tempMap.keySet().toArray()[i]) + "','" + 0 + "','" + mysql.currentTimeNoBracket() + "');");
+                                "('0','" + p.getUniqueId() + "','" + p.getName() + "','" + tempMap.keySet().toArray()[i] + "','" + itemNameMap.get(tempMap.keySet().toArray()[i]) + "','" + 0 + "','" + mysql.currentTimeNoBracket() + "');");
                     }
-                    mysql.execute("UPDATE item_storage SET amount = amount + " + tempMap.get(tempMap.keySet().toArray()[i] ) + " WHERE uuid ='" + e.getWhoClicked().getUniqueId() + "' and item_id =" + tempMap.keySet().toArray()[i]);
+                    mysql.execute("UPDATE item_storage SET amount = amount + " + tempMap.get(tempMap.keySet().toArray()[i] ) + " WHERE uuid ='" + p.getUniqueId() + "' and item_id =" + tempMap.keySet().toArray()[i]);
                 }
-                sendMessageOfStoreToPlayer(tempMap, (Player) e.getWhoClicked());
+                sendMessageOfStoreToPlayer(tempMap, (Player) p);
                 if(!hasGarbage){
-                    e.getWhoClicked().closeInventory();
+                    p.closeInventory();
                 }
             }
         }

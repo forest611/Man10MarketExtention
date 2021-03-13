@@ -27,13 +27,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b0c6376-18f4-440d-83cb-5aa727a4549a" name="Default" comment="バグ修正、CustomModelData対応">
+    <list default="true" id="0b0c6376-18f4-440d-83cb-5aa727a4549a" name="Default" comment="build設定の修正">
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/Man10MarketExtention.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/Man10MarketExtention.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -390,7 +387,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608549035171</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="build設定の修正">
+      <created>1611996589881</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1611996589881</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -413,7 +417,8 @@
     <MESSAGE value="安山岩などが取り出し画面で正しく表示されない問題の修正" />
     <MESSAGE value="fix gitignore" />
     <MESSAGE value="バグ修正、CustomModelData対応" />
-    <option name="LAST_COMMIT_MESSAGE" value="バグ修正、CustomModelData対応" />
+    <MESSAGE value="build設定の修正" />
+    <option name="LAST_COMMIT_MESSAGE" value="build設定の修正" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
