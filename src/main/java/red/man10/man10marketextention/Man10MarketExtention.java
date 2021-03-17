@@ -449,7 +449,7 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
 
     @EventHandler
     public void closeInventory(InventoryCloseEvent e){
-        if(e.getPlayer().getOpenInventory().getTitle().equals("§2§l転送するアイテムを選択してください")){
+        if(e.getPlayer().getOpenInventory().getTitle().equals("§2§l転送するアイテムを入れてください")){
             HashMap<Integer, Long> tempMap = new HashMap<>();
             ArrayList<ItemStack> items = getMarketItem();
             for(int i = 0;i < 45;i++){
