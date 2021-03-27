@@ -27,11 +27,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b0c6376-18f4-440d-83cb-5aa727a4549a" name="Default" comment="軽くリファクタリング">
-      <change afterPath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/MySQLFunc.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/MySQLManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Man10MysqlApi.jar" beforeDir="false" />
+    <list default="true" id="0b0c6376-18f4-440d-83cb-5aa727a4549a" name="Default" comment="DB処理がスレッド化できていなかった問題を修正">
       <change beforePath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/Man10MarketExtention.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/Man10MarketExtention.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -404,7 +400,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615607585740</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="DB処理がスレッド化できていなかった問題を修正">
+      <created>1616828221613</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1616828221613</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -429,7 +432,8 @@
     <MESSAGE value="バグ修正、CustomModelData対応" />
     <MESSAGE value="build設定の修正" />
     <MESSAGE value="軽くリファクタリング" />
-    <option name="LAST_COMMIT_MESSAGE" value="軽くリファクタリング" />
+    <MESSAGE value="DB処理がスレッド化できていなかった問題を修正" />
+    <option name="LAST_COMMIT_MESSAGE" value="DB処理がスレッド化できていなかった問題を修正" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

@@ -460,28 +460,29 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
                 HashMap<Integer, Long> tempMap = new HashMap<>();
                 if (a.contains(e.getSlot())){
                     e.setCancelled(true);
-                    ArrayList<ItemStack> items = getMarketItem();
-                    for(int i = 0;i < 45;i++){
-                        if(e.getInventory().getItem(i) != null){
-                            ItemStack checkItem = e.getInventory().getItem(i).clone();
-                            checkItem.setAmount(1);
-                            if(items.contains(checkItem)){
-                                if(!tempMap.containsKey(itemMap.get(checkItem))){
-                                    tempMap.put(itemMap.get(checkItem), 0L);
+                    es.execute(()->{
+                        ArrayList<ItemStack> items = getMarketItem();
+                        for(int i = 0;i < 45;i++){
+                            if(e.getInventory().getItem(i) != null){
+                                ItemStack checkItem = e.getInventory().getItem(i).clone();
+                                checkItem.setAmount(1);
+                                if(items.contains(checkItem)){
+                                    if(!tempMap.containsKey(itemMap.get(checkItem))){
+                                        tempMap.put(itemMap.get(checkItem), 0L);
+                                    }
+                                    tempMap.put(itemMap.get(checkItem), tempMap.get(itemMap.get(checkItem)) + e.getInventory().getItem(i).getAmount());
+                                    e.getInventory().setItem(i, new ItemStack(Material.AIR));
                                 }
-                                tempMap.put(itemMap.get(checkItem), tempMap.get(itemMap.get(checkItem)) + e.getInventory().getItem(i).getAmount());
-                                e.getInventory().setItem(i, new ItemStack(Material.AIR));
                             }
                         }
-                    }
-                    boolean hasGarbage = false;
-                    for(int i = 0;i < 45;i++){
-                        if(e.getInventory().getItem(i) != null){
-                            hasGarbage = true;
+                        boolean hasGarbage = false;
+                        for(int i = 0;i < 45;i++){
+                            if(e.getInventory().getItem(i) != null){
+                                hasGarbage = true;
+                            }
                         }
-                    }
 
-                    es.execute(()->{
+
                         for(int i = 0;i < tempMap.size();i++){
 
                             if(!checkIfUserHasStorage(p.getUniqueId(), (Integer) tempMap.keySet().toArray()[i])){
@@ -493,11 +494,12 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
 
                         sendMessageOfStoreToPlayer(tempMap, p);
 
+                        if (!hasGarbage){
+                            Bukkit.getScheduler().runTask(this, (Runnable) p::closeInventory);
+                        }
+
                     });
 
-                    if(!hasGarbage){
-                        p.closeInventory();
-                    }
                 }
                 break;
             }
@@ -517,23 +519,22 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
     public void closeInventory(InventoryCloseEvent e){
         if(!e.getPlayer().getOpenInventory().getTitle().equals("§2§l転送するアイテムを入れてください")){ return;}
 
-        HashMap<Integer, Long> tempMap = new HashMap<>();
-        ArrayList<ItemStack> items = getMarketItem();
-        for(int i = 0;i < 45;i++){
-            if(e.getInventory().getItem(i) != null){
-                ItemStack checkItem = e.getInventory().getItem(i).clone();
-                checkItem.setAmount(1);
-                if(items.contains(checkItem)){
-                    if(!tempMap.containsKey(itemMap.get(checkItem))){
-                        tempMap.put(itemMap.get(checkItem), 0L);
+        es.execute(()->{
+            HashMap<Integer, Long> tempMap = new HashMap<>();
+            ArrayList<ItemStack> items = getMarketItem();
+            for(int i = 0;i < 45;i++){
+                if(e.getInventory().getItem(i) != null){
+                    ItemStack checkItem = e.getInventory().getItem(i).clone();
+                    checkItem.setAmount(1);
+                    if(items.contains(checkItem)){
+                        if(!tempMap.containsKey(itemMap.get(checkItem))){
+                            tempMap.put(itemMap.get(checkItem), 0L);
+                        }
+                        tempMap.put(itemMap.get(checkItem), tempMap.get(itemMap.get(checkItem)) + e.getInventory().getItem(i).getAmount());
+                        e.getInventory().setItem(i, new ItemStack(Material.AIR));
                     }
-                    tempMap.put(itemMap.get(checkItem), tempMap.get(itemMap.get(checkItem)) + e.getInventory().getItem(i).getAmount());
-                    e.getInventory().setItem(i, new ItemStack(Material.AIR));
                 }
             }
-        }
-
-        es.execute(()->{
             for(int i = 0;i < tempMap.size();i++){
                 if(!checkIfUserHasStorage(e.getPlayer().getUniqueId(), (Integer) tempMap.keySet().toArray()[i])){
                     mysql.execute("INSERT INTO item_storage (`id`,`uuid`,`player`,`item_id`,`key`,`amount`,`datetime`) VALUES " +
@@ -541,8 +542,8 @@ public final class Man10MarketExtention extends JavaPlugin implements Listener {
                 }
                 mysql.execute("UPDATE item_storage SET amount = amount + " + tempMap.get(tempMap.keySet().toArray()[i] ) + " WHERE uuid ='" + e.getPlayer().getUniqueId() + "' and item_id =" + tempMap.keySet().toArray()[i]);
             }
+            sendMessageOfStoreToPlayer(tempMap, (Player) e.getPlayer());
         });
-        sendMessageOfStoreToPlayer(tempMap, (Player) e.getPlayer());
 
     }
 }
