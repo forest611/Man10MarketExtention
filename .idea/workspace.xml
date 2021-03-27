@@ -27,9 +27,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b0c6376-18f4-440d-83cb-5aa727a4549a" name="Default" comment="build設定の修正">
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+    <list default="true" id="0b0c6376-18f4-440d-83cb-5aa727a4549a" name="Default" comment="軽くリファクタリング">
+      <change afterPath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/MySQLFunc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/MySQLManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Man10MysqlApi.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/Man10MarketExtention.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention/Man10MarketExtention.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -129,7 +131,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.38551402" />
@@ -137,12 +139,13 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/red/man10/man10marketextention" />
+      <recent name="C:\Users\sho\Desktop\program\minecraft plugin project\Man10MarketExtention\src\main\resources" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/src/main" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\sho\Desktop\program\minecraft plugin project\Man10MarketExtention\src\main\resources" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle./Users/forest/Documents/plugins/projects/Man10MarketExtention [init --type pom]">
@@ -394,7 +397,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611996589881</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="軽くリファクタリング">
+      <created>1615607585740</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1615607585740</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -418,7 +428,8 @@
     <MESSAGE value="fix gitignore" />
     <MESSAGE value="バグ修正、CustomModelData対応" />
     <MESSAGE value="build設定の修正" />
-    <option name="LAST_COMMIT_MESSAGE" value="build設定の修正" />
+    <MESSAGE value="軽くリファクタリング" />
+    <option name="LAST_COMMIT_MESSAGE" value="軽くリファクタリング" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
